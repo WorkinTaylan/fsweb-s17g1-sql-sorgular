@@ -80,42 +80,58 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını alt
 
 	14) Sınıfı 10A veya 10B olan erkekleri listeleyiniz.
 	
-	
+		SELECT * FROM ogrenci WHERE cinsiyet = "e" AND sinif IN ("10B", "10A") ;
+
 	15) Öğrenci tablosunda doğum yılı 1989 olan öğrencileri listeleyiniz.
-	
+
+		SELECT * FROM ogrenci WHERE dtarih =1989
 	
 	16) Öğrenci numarası 30 ile 50 arasında olan Kız öğrencileri listeleyiniz.
-	
+
+		SELECT * FROM ogrenci WHERE ogrno BETWEEN 30 AND 50;
 	
 	17) Öğrencileri adına göre sıralayınız (alfabetik).
 	
-	
+		SELECT * FROM ogrenci ORDER BY ograd ASC;
+
 	18) Öğrencileri adına, adı aynı olanlarıda soyadlarına göre sıralayınız.
+
+		SELECT * FROM ogrenci ORDER BY ograd, ogrsoyad;
 	
 	
 	19) 10A sınıfındaki öğrencileri okul numarasına göre azalan olarak sıralayınız.
-	
+
+		SELECT * FROM ogrenci where sinif="10A" ORDER BY ogrno desc;
 	
 	20) Öğrenciler tablosundaki ilk 10 kaydı listeleyiniz.
 	[İPUCU: `Select top tüm mysql versiyonlarında düzgün çalışmaz. LİMİT kullanmak daha faydalıdır`]
 	
+		SELECT * FROM ogrenci LIMIT 10;
+
 	21) Öğrenciler tablosundaki ilk 10 kaydın ad, soyad ve doğum tarihi bilgilerini listeleyiniz.
 	
+		SELECT ograd,ogrsoyad,dtarih FROM ogrenci LIMIT 10;
 	
 	22) Sayfa sayısı en fazla olan kitabı listeleyiniz.
-	
+
+		SELECT * FROM kitap order by sayfasayisi desc limit 1;
 	
 	23) Öğrenciler tablosundaki en genç öğrenciyi listeleyiniz.
 	
+		SELECT * FROM ogrenci WHERE dtarih IS NOT NULL ORDER BY dtarih DESC; 
+
 	
 	24) 10A sınıfındaki en yaşlı öğrenciyi listeyin.
-	
+
+		SELECT * FROM ogrenci WHERE sinif="10a" AND dtarih IS NOT NULL ORDER BY dtarih ASC LIMIT 1; 
 	
 	25) İkinci harfi N olan kitapları listeleyiniz.
 	
-	
+		SELECT * FROM kitap Where kitapadi like "_N%";
+
 	26) Öğrencileri sınıflarına göre gruplayarak listeleyin.
-	
+
+		SELECT count(sinif) as "Sınıf mevcudu", sinif FROM ogrenci group by sinif;
 	
 	27) Öğrencileri her sorgulamada sıralaması farklı olacak şekilde rastgele listeleyin. 
 	[İPUCU: rand() fonksiyonu]
